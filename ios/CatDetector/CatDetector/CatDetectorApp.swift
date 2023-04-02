@@ -13,6 +13,7 @@ import WindowsAzureMessaging
 @main
 struct CatDetectorApp: App {
     let persistenceController = PersistenceController.shared
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @StateObject private var notifictionViewModel = NotificationViewModel()
 
