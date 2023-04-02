@@ -15,6 +15,7 @@
 		44C9ABEA29D68EEC002480EC /* CatDetector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44C9ABE829D68EEC002480EC /* CatDetector.xcdatamodeld */; };
 		44C9ABF229D68F7E002480EC /* WindowsAzureMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 44C9ABF129D68F7E002480EC /* WindowsAzureMessaging */; };
 		44C9ABF629D694B9002480EC /* Notification.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44C9ABF529D694B9002480EC /* Notification.plist */; };
+		44C9ABF929D935F1002480EC /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9ABF829D935F1002480EC /* NotificationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		44C9ABE629D68EEC002480EC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		44C9ABE929D68EEC002480EC /* CatDetector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CatDetector.xcdatamodel; sourceTree = "<group>"; };
 		44C9ABF529D694B9002480EC /* Notification.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Notification.plist; path = CatDetector/Notification.plist; sourceTree = SOURCE_ROOT; };
+		44C9ABF829D935F1002480EC /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		44C9ABFA29D941D0002480EC /* CatDetector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CatDetector.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +62,8 @@
 		44C9ABDC29D68EEB002480EC /* CatDetector */ = {
 			isa = PBXGroup;
 			children = (
+				44C9ABFA29D941D0002480EC /* CatDetector.entitlements */,
+				44C9ABF729D935E0002480EC /* ViewModels */,
 				44C9ABDD29D68EEB002480EC /* CatDetectorApp.swift */,
 				44C9ABDF29D68EEB002480EC /* ContentView.swift */,
 				44C9ABE129D68EEC002480EC /* Assets.xcassets */,
@@ -76,6 +81,14 @@
 				44C9ABE429D68EEC002480EC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		44C9ABF729D935E0002480EC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				44C9ABF829D935F1002480EC /* NotificationViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44C9ABE729D68EEC002480EC /* Persistence.swift in Sources */,
+				44C9ABF929D935F1002480EC /* NotificationViewModel.swift in Sources */,
 				44C9ABE029D68EEB002480EC /* ContentView.swift in Sources */,
 				44C9ABEA29D68EEC002480EC /* CatDetector.xcdatamodeld in Sources */,
 				44C9ABDE29D68EEB002480EC /* CatDetectorApp.swift in Sources */,
@@ -284,6 +298,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CatDetector/CatDetector.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CatDetector/Preview Content\"";
@@ -294,8 +309,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,9 +318,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.fernandozhu.CatDetector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -314,6 +332,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CatDetector/CatDetector.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CatDetector/Preview Content\"";
@@ -324,8 +343,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,9 +352,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.fernandozhu.CatDetector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
