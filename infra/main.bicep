@@ -85,3 +85,48 @@ resource notificationHub 'Microsoft.NotificationHubs/namespaces/notificationHubs
     // configue it in Azure Portal later on
   }
 }
+
+resource noSqlAccount 'Microsoft.DocumentDB/databaseAccounts@2022-11-15' = {
+  name: 'cosno-cat-detector'
+  location: location
+  kind: 'GlobalDocumentDB'
+  properties: {
+    consistencyPolicy: {
+      defaultConsistencyLevel: 'Session'
+    }
+    locations: [
+      {
+        locationName: location
+        failoverPriority: 0
+        isZoneRedundant: false
+      }
+    ]
+    databaseAccountOfferType: 'Standard'
+  }
+}
+
+resource noSqlDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-11-15' = {
+  parent: noSqlAccount
+  name: 'cosmos-cat-detector'
+  properties: {
+    resource: {
+      id: 'cosmos-cat-detector'
+    }
+  }
+}
+
+resource noSqlContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-11-15' = {
+  parent: noSqlDatabase
+  name: 'cat-detection'
+  properties: {
+    resource: {
+      id: 'cat-detection'
+      partitionKey: {
+        paths: [
+          '/date'
+        ]
+        kind: 'Hash'
+      }
+    }
+  }
+}
