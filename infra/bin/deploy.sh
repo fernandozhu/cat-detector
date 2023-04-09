@@ -7,6 +7,7 @@ if [ ! -d "../func-app/$funcCatDetector" ]
 then
     source ./func-init.sh
 fi
+# source ./func-build.sh
 
 # Switch subscription
 az account set --subscription $subscription

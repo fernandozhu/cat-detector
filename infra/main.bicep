@@ -144,18 +144,6 @@ resource noSqlContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/cont
   }
 }
 
-// resource testFunc 'Microsoft.Web/sites/functions@2022-03-01' = {
-//   name: 'CatDetectionHandler'
-//   parent: funcApp
-//   properties: {
-//     files: {
-
-//     }
-
-//   }
-
-// }
-
 resource eventSubscription 'Microsoft.EventGrid/eventSubscriptions@2022-06-15' = {
   name: 'evgs-cat-detector'
   scope: imageStorage
@@ -180,3 +168,12 @@ resource eventSubscription 'Microsoft.EventGrid/eventSubscriptions@2022-06-15' =
     }
   }
 }
+
+// resource zipDeploy 'Microsoft.Web/sites/extensions@2022-09-01' = {
+//   name: 'MSDeploy'
+//   parent: funcApp
+//   properties: {
+//     // Relative file url doesn't work as a package uri
+//     packageUri: './func-app/CatDetector/bin/CatDetector.zip'
+//   }
+// }
