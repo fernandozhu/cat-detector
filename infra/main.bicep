@@ -130,3 +130,40 @@ resource noSqlContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/cont
     }
   }
 }
+
+// resource testFunc 'Microsoft.Web/sites/functions@2022-03-01' = {
+//   name: 'CatDetectionHandler'
+//   parent: funcApp
+//   properties: {
+//     files: {
+
+//     }
+
+//   }
+
+// }
+
+resource eventSubscription 'Microsoft.EventGrid/eventSubscriptions@2022-06-15' = {
+  name: 'evgs-cat-detector'
+  scope: imageStorage
+  properties: {
+
+    eventDeliverySchema: 'EventGridSchema'
+    destination: {
+      endpointType: 'AzureFunction'
+      properties: {
+        resourceId: resourceId('Microsoft.Web/sites/functions', funcAppName, 'CatDetectionHandler')
+        maxEventsPerBatch: 1
+        preferredBatchSizeInKilobytes: 64
+      }
+    }
+
+    filter: {
+      includedEventTypes: [
+        'Microsoft.Storage.BlobCreated'
+        'Microsoft.Storage.BlobDeleted'
+      ]
+      enableAdvancedFilteringOnArrays: true
+    }
+  }
+}
