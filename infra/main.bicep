@@ -10,6 +10,19 @@ resource imageStorage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
+resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
+  name: 'default'
+  parent: imageStorage
+}
+
+resource blobContainers 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-09-01' = [for containerName in [ 'images' ]: {
+  name: containerName
+  parent: blobService
+  properties: {
+    publicAccess: 'None'
+  }
+}]
+
 resource funcAppStorage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: 'stcatdetectorfuncmeta'
   location: location
