@@ -2,7 +2,7 @@
   "profiles": {
     "CatDetector": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7012",
+      "commandLineArgs": "--port 7226",
       "launchBrowser": false
     }
   }
