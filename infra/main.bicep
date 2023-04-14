@@ -23,6 +23,52 @@ resource blobContainers 'Microsoft.Storage/storageAccounts/blobServices/containe
   }
 }]
 
+
+resource noSqlAccount 'Microsoft.DocumentDB/databaseAccounts@2022-11-15' = {
+  name: 'cosno-cat-detector'
+  location: location
+  kind: 'GlobalDocumentDB'
+  properties: {
+    consistencyPolicy: {
+      defaultConsistencyLevel: 'Session'
+    }
+    locations: [
+      {
+        locationName: location
+        failoverPriority: 0
+        isZoneRedundant: false
+      }
+    ]
+    databaseAccountOfferType: 'Standard'
+  }
+}
+
+resource noSqlDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-11-15' = {
+  parent: noSqlAccount
+  name: 'cosmos-cat-detector'
+  properties: {
+    resource: {
+      id: 'cosmos-cat-detector'
+    }
+  }
+}
+
+resource noSqlContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-11-15' = {
+  parent: noSqlDatabase
+  name: 'cat-detection'
+  properties: {
+    resource: {
+      id: 'cat-detection'
+      partitionKey: {
+        paths: [
+          '/date'
+        ]
+        kind: 'Hash'
+      }
+    }
+  }
+}
+
 resource funcAppStorage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: 'stcatdetectorfuncmeta'
   location: location
@@ -76,6 +122,11 @@ resource funcApp 'Microsoft.Web/sites@2022-03-01' = {
           name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
           value: 'DefaultEndpointsProtocol=https;AccountName=${funcAppStorage.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${funcAppStorage.listKeys().keys[0].value}'
         }
+        {
+          // Better to store connection string into KeyVault
+          name: 'CosmosDbConnectionString'
+          value: noSqlAccount.listConnectionStrings().connectionStrings[0].connectionString
+        }
       ]
     }
   }
@@ -99,50 +150,6 @@ resource notificationHub 'Microsoft.NotificationHubs/namespaces/notificationHubs
   }
 }
 
-resource noSqlAccount 'Microsoft.DocumentDB/databaseAccounts@2022-11-15' = {
-  name: 'cosno-cat-detector'
-  location: location
-  kind: 'GlobalDocumentDB'
-  properties: {
-    consistencyPolicy: {
-      defaultConsistencyLevel: 'Session'
-    }
-    locations: [
-      {
-        locationName: location
-        failoverPriority: 0
-        isZoneRedundant: false
-      }
-    ]
-    databaseAccountOfferType: 'Standard'
-  }
-}
-
-resource noSqlDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-11-15' = {
-  parent: noSqlAccount
-  name: 'cosmos-cat-detector'
-  properties: {
-    resource: {
-      id: 'cosmos-cat-detector'
-    }
-  }
-}
-
-resource noSqlContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-11-15' = {
-  parent: noSqlDatabase
-  name: 'cat-detection'
-  properties: {
-    resource: {
-      id: 'cat-detection'
-      partitionKey: {
-        paths: [
-          '/date'
-        ]
-        kind: 'Hash'
-      }
-    }
-  }
-}
 
 resource eventSubscription 'Microsoft.EventGrid/eventSubscriptions@2022-06-15' = {
   name: 'evgs-cat-detector'
