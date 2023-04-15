@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "type": "eventGridTrigger",
+      "name": "eventGridEvent",
+      "direction": "in"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "outputDocument",
+      "databaseName": "cosmos-cat-detector",
+      "collectionName": "cat-detection",
+      "connectionStringSetting": "CosmosDbConnectionString",
+      "direction": "out",
+      "partitionKey": "/date"
+    }
+  ],
+  "scriptFile": "../dist/CatDetectionHandler/index.js"
+}
