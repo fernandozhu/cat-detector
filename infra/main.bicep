@@ -183,6 +183,61 @@ resource eventSubscription 'Microsoft.EventGrid/eventSubscriptions@2022-06-15' =
   }
 }
 
+resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
+  name: 'kv-cat-detector'
+  location: location
+  properties: {
+    enabledForDeployment: true
+    enabledForTemplateDeployment: true
+    tenantId: subscription().tenantId
+    accessPolicies: [
+      {
+        objectId: '6125526c-d948-4839-b944-3d18efed5e27'
+        tenantId: subscription().tenantId
+        permissions: {
+          keys: [ 'all' ]
+          secrets: [ 'all' ]
+        }
+      }
+      {
+        objectId: funcApp.identity.principalId
+        tenantId: subscription().tenantId
+        permissions: {
+          keys: [ 'list' ]
+          secrets: [ 'list' ]
+        }
+      }
+    ]
+    sku: {
+      name: 'standard'
+      family: 'A'
+    }
+  }
+}
+
+resource cosmosConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'cosmosdb-connection'
+  parent: keyVault
+  properties: {
+    value: noSqlAccount.listConnectionStrings().connectionStrings[0].connectionString
+  }
+}
+
+resource pushNotificationListenConnection 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'push-notification-connection-listen'
+  parent: keyVault
+  properties: {
+    value: listKeys(resourceId('Microsoft.NotificationHubs/namespaces/notificationHubs/authorizationRules', notificationNamespace.name, notificationHub.name, 'DefaultListenSharedAccessSignature'), '2020-01-01-preview').primaryConnectionString
+  }
+}
+
+resource pushNotificationFullAccessConnection 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'push-notification-connection-full'
+  parent: keyVault
+  properties: {
+    value: listKeys(resourceId('Microsoft.NotificationHubs/namespaces/notificationHubs/authorizationRules', notificationNamespace.name, notificationHub.name, 'DefaultFullSharedAccessSignature'), '2020-01-01-preview').primaryConnectionString
+  }
+}
 
 // resource zipDeploy 'Microsoft.Web/sites/extensions@2022-09-01' = {
 //   name: 'MSDeploy'
