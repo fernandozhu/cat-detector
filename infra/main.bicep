@@ -23,7 +23,6 @@ resource blobContainers 'Microsoft.Storage/storageAccounts/blobServices/containe
   }
 }]
 
-
 resource noSqlAccount 'Microsoft.DocumentDB/databaseAccounts@2022-11-15' = {
   name: 'cosno-cat-detector'
   location: location
@@ -37,6 +36,11 @@ resource noSqlAccount 'Microsoft.DocumentDB/databaseAccounts@2022-11-15' = {
         locationName: location
         failoverPriority: 0
         isZoneRedundant: false
+      }
+    ]
+    capabilities: [
+      {
+        name: 'EnableServerless'
       }
     ]
     databaseAccountOfferType: 'Standard'
@@ -154,7 +158,6 @@ resource notificationHub 'Microsoft.NotificationHubs/namespaces/notificationHubs
   }
 }
 
-
 resource eventSubscription 'Microsoft.EventGrid/eventSubscriptions@2022-06-15' = {
   name: 'evgs-cat-detector'
   scope: imageStorage
@@ -179,6 +182,7 @@ resource eventSubscription 'Microsoft.EventGrid/eventSubscriptions@2022-06-15' =
     }
   }
 }
+
 
 // resource zipDeploy 'Microsoft.Web/sites/extensions@2022-09-01' = {
 //   name: 'MSDeploy'
