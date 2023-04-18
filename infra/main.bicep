@@ -239,11 +239,10 @@ resource pushNotificationFullAccessConnection 'Microsoft.KeyVault/vaults/secrets
   }
 }
 
-// resource zipDeploy 'Microsoft.Web/sites/extensions@2022-09-01' = {
-//   name: 'MSDeploy'
-//   parent: funcApp
-//   properties: {
-//     // Relative file url doesn't work as a package uri
-//     packageUri: './func-app/CatDetector/bin/CatDetector.zip'
-//   }
-// }
+resource storageAccountAccessKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'storage-account-access-key'
+  parent: keyVault
+  properties: {
+    value: imageStorage.listKeys().keys[0].value // Better to use SAS instead
+  }
+}
