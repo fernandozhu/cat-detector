@@ -34,3 +34,5 @@ resource storageAccountAccessKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' 
     value: storageAccount.listKeys().keys[0].value // Better to use SAS instead
   }
 }
+
+output name string = storageAccount.name
