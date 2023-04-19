@@ -1,7 +1,8 @@
 #!/bin/bash
 source ./variables.sh
 
-cd ../func-app/$funcCatDetector
+pushd ./$funcCatDetector
 # Deploy Azure Function code to Function App
 npm run build
 func azure functionapp publish $funcAppName
+popd 
