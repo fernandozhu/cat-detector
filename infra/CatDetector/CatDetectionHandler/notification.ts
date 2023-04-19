@@ -2,20 +2,25 @@ import {
   NotificationHubsClient,
   createAppleNotification,
 } from "@azure/notification-hubs";
-import { HUB_NAME, NOTIFICATION_CONNECTION } from "./env";
+import * as NodeCache from "node-cache";
+import {
+  notificationHubConnectionKey,
+  notificationHubName,
+} from "../utils/constants";
+import { getSecret } from "../utils/keyVault";
 
 export class NotificationClient {
   private readonly _alertSound = "bingbong.aiff";
-  private readonly _client: NotificationHubsClient;
+  private _client: NotificationHubsClient;
+  private _cache: NodeCache;
 
-  constructor() {
-    this._client = new NotificationHubsClient(
-      NOTIFICATION_CONNECTION,
-      HUB_NAME
-    );
+  constructor(cache: NodeCache) {
+    this._cache = cache;
   }
 
   public async sendPushNotification(message: string) {
+    this.initialiseClient();
+
     const messageBody = JSON.stringify({
       aps: { alert: message, sound: this._alertSound },
     });
@@ -28,5 +33,21 @@ export class NotificationClient {
     });
 
     await this._client.sendNotification(notification);
+  }
+
+  private async initialiseClient() {
+    if (this._client) {
+      return;
+    }
+
+    const connectionString = await getSecret(
+      notificationHubConnectionKey,
+      this._cache
+    );
+
+    this._client = new NotificationHubsClient(
+      connectionString,
+      notificationHubName
+    );
   }
 }

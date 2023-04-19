@@ -1,20 +1,28 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
 import { CosmosClient } from "@azure/cosmos";
-import { CONTAINER_NAME, DATABASE_NAME, ENDPOINT, KEY } from "./env";
+import * as NodeCache from "node-cache";
+import { getSecret } from "../utils/keyVault";
+import {
+  cosmosDbConnectionKey,
+  cosmosDbContainerName,
+  cosmosDbName,
+} from "../utils/constants";
+
+const cache = new NodeCache();
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
   req: HttpRequest
 ): Promise<void> {
-  const cosmosClient = new CosmosClient({ endpoint: ENDPOINT, key: KEY });
+  const connectionString = await getSecret(cosmosDbConnectionKey, cache);
+  const cosmosClient = new CosmosClient(connectionString);
   const container = cosmosClient
-    .database(DATABASE_NAME)
-    .container(CONTAINER_NAME);
+    .database(cosmosDbName)
+    .container(cosmosDbContainerName);
 
   const records = await container.items.query("SELECT * FROM C").fetchAll();
 
   context.res = {
-    // status: 200, /* Defaults to 200 */
     body: {
       records: records.resources,
       hasMoreResults: records.hasMoreResults,
