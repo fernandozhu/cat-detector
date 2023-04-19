@@ -80,3 +80,11 @@ resource keyVaultAccess 'Microsoft.KeyVault/vaults/accessPolicies@2023-02-01' = 
     ]
   }
 }
+
+module eventGrid './modules/event-grid.bicep' = {
+  name: 'eventGrid'
+  params: {
+    funcAppName: funcAppName
+    storageAccountName: storageAccount.outputs.name
+  }
+}
