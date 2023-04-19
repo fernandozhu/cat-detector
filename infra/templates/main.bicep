@@ -71,11 +71,10 @@ resource keyVaultAccess 'Microsoft.KeyVault/vaults/accessPolicies@2023-02-01' = 
         }
       }
       {
-        objectId: funcApp.outputs.principleId
+        objectId: funcApp.outputs.principalId
         tenantId: subscription().tenantId
         permissions: {
-          keys: [ 'list' ]
-          secrets: [ 'list' ]
+          secrets: [ 'get' ]
         }
       }
     ]

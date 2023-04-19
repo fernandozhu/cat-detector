@@ -70,4 +70,4 @@ resource funcApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 
 @description('Function App identity')
-output principleId string = funcApp.identity.principalId
+output principalId string = funcApp.identity.principalId
