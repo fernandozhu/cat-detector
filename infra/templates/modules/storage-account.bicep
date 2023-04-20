@@ -27,11 +27,11 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyVaultName
 }
 
-resource storageAccountAccessKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
-  name: 'storage-account-access-key'
+resource storageAccountConnectionString 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: 'storage-account-connection'
   parent: keyVault
   properties: {
-    value: storageAccount.listKeys().keys[0].value // Better to use SAS instead
+    value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
   }
 }
 
