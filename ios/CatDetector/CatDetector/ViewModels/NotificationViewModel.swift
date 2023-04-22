@@ -13,26 +13,38 @@ import UIKit
 //class NotificationViewModel: NSObject, ObservableObject, MSNotificationHubDelegate {
 class NotificationViewModel: NSObject, ObservableObject {
     
-    override init() {
-        super.init()
-
-//        if let path = Bundle.main.path(forResource: "Notification", ofType: "plist") {
-//            if let propValues = NSDictionary(contentsOfFile: path) {
-//                let connectionString = propValues["ConnectionString"] as? String ?? ""
-//                let hubName = propValues["HubName"] as? String ?? ""
-//
-//                if (!connectionString.isEmpty && !hubName.isEmpty) {
-//                    MSNotificationHub.setDelegate(self)
-//                    MSNotificationHub.start(connectionString: connectionString, hubName: hubName)
-//                }
-//            }
-//        }
-    }
+    @Published var hasMoreResults: Bool = false
+    @Published var records: [CatDetectionRecord] = []
     
-//    func notificationHub(_ notificationHub: MSNotificationHub, didReceivePushNotification message: MSNotificationHubMessage) {
-//        let title = message.title ?? "NIL"
-//        let messageContent = message.body ?? "NIL"
-//
-//        print("Title: \(title)\nMessage: \(messageContent)")
-//    }
+    func fetchRecords() {
+        records = []
+        
+        if let path = Bundle.main.path(forResource: "Settings", ofType: "plist") {
+            if let propValues = NSDictionary(contentsOfFile: path) {
+                let apiUrl = propValues["ApiUrl"] as? String ?? ""
+                
+                if let apiUrl = URL(string: apiUrl) {
+                    var request = URLRequest(url: apiUrl)
+                    request.httpMethod = "GET"
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    
+                    let task = URLSession.shared.dataTask(with: request) {data, _, error in
+                        guard let data = data, error == nil else {
+                            return
+                        }
+
+                        do {
+                            var response = try JSONDecoder().decode(ResponseModel.self, from: data)
+                            // TODO: Publish values using the main thread
+                            self.records = response.records
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    task.resume()
+                }
+            }
+            
+        }
+    }
 }

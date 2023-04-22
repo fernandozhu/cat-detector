@@ -15,7 +15,7 @@ struct CatDetectorApp: App {
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    @StateObject private var notifictionViewModel = NotificationViewModel()
+    @StateObject public var notifictionViewModel = NotificationViewModel()
 
     var body: some Scene {
         WindowGroup {
@@ -23,9 +23,7 @@ struct CatDetectorApp: App {
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(notifictionViewModel)
                 .onAppear{
-                    // MSNotificationHub.start(connectionString: connectionString, hubName: hubName)
-                    
-                    
+                    notifictionViewModel.fetchRecords()
                 }
         }
     }
