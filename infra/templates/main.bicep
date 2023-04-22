@@ -74,9 +74,17 @@ resource keyVaultAccess 'Microsoft.KeyVault/vaults/accessPolicies@2023-02-01' = 
         objectId: funcApp.outputs.principalId
         tenantId: subscription().tenantId
         permissions: {
-          secrets: [ 'get' ]
+          secrets: [ 'get', 'set', 'list' ]
         }
       }
     ]
+  }
+}
+
+module eventGrid './modules/event-grid.bicep' = {
+  name: 'eventGrid'
+  params: {
+    funcAppName: funcAppName
+    storageAccountName: storageAccount.outputs.name
   }
 }

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		442BFFBF29F2909000068C5E /* CatDetectionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442BFFBE29F2909000068C5E /* CatDetectionRecord.swift */; };
+		442BFFC329F296BC00068C5E /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442BFFC229F296BC00068C5E /* NotificationRow.swift */; };
+		442BFFC529F2A65400068C5E /* NotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442BFFC429F2A65400068C5E /* NotificationList.swift */; };
+		442BFFC729F2A8FC00068C5E /* NotificationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442BFFC629F2A8FC00068C5E /* NotificationDetail.swift */; };
+		442BFFC929F2C59400068C5E /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442BFFC829F2C59400068C5E /* ResponseModel.swift */; };
+		444289B729F3F5090097486B /* Settings.example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444289B629F3F5080097486B /* Settings.example.plist */; };
 		44C9ABDE29D68EEB002480EC /* CatDetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9ABDD29D68EEB002480EC /* CatDetectorApp.swift */; };
 		44C9ABE029D68EEB002480EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9ABDF29D68EEB002480EC /* ContentView.swift */; };
 		44C9ABE229D68EEC002480EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C9ABE129D68EEC002480EC /* Assets.xcassets */; };
@@ -14,12 +20,18 @@
 		44C9ABE729D68EEC002480EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9ABE629D68EEC002480EC /* Persistence.swift */; };
 		44C9ABEA29D68EEC002480EC /* CatDetector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44C9ABE829D68EEC002480EC /* CatDetector.xcdatamodeld */; };
 		44C9ABF229D68F7E002480EC /* WindowsAzureMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 44C9ABF129D68F7E002480EC /* WindowsAzureMessaging */; };
-		44C9ABF629D694B9002480EC /* Notification.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44C9ABF529D694B9002480EC /* Notification.plist */; };
+		44C9ABF629D694B9002480EC /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44C9ABF529D694B9002480EC /* Settings.plist */; };
 		44C9ABF929D935F1002480EC /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9ABF829D935F1002480EC /* NotificationViewModel.swift */; };
 		44C9ABFC29D99BA7002480EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C9ABFB29D99BA7002480EC /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		442BFFBE29F2909000068C5E /* CatDetectionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDetectionRecord.swift; sourceTree = "<group>"; };
+		442BFFC229F296BC00068C5E /* NotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
+		442BFFC429F2A65400068C5E /* NotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationList.swift; sourceTree = "<group>"; };
+		442BFFC629F2A8FC00068C5E /* NotificationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetail.swift; sourceTree = "<group>"; };
+		442BFFC829F2C59400068C5E /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
+		444289B629F3F5080097486B /* Settings.example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.example.plist; sourceTree = "<group>"; };
 		44C9ABDA29D68EEB002480EC /* CatDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C9ABDD29D68EEB002480EC /* CatDetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDetectorApp.swift; sourceTree = "<group>"; };
 		44C9ABDF29D68EEB002480EC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,7 +39,7 @@
 		44C9ABE429D68EEC002480EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		44C9ABE629D68EEC002480EC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		44C9ABE929D68EEC002480EC /* CatDetector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CatDetector.xcdatamodel; sourceTree = "<group>"; };
-		44C9ABF529D694B9002480EC /* Notification.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Notification.plist; path = CatDetector/Notification.plist; sourceTree = SOURCE_ROOT; };
+		44C9ABF529D694B9002480EC /* Settings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Settings.plist; path = CatDetector/Settings.plist; sourceTree = SOURCE_ROOT; };
 		44C9ABF829D935F1002480EC /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		44C9ABFA29D941D0002480EC /* CatDetector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CatDetector.entitlements; sourceTree = "<group>"; };
 		44C9ABFB29D99BA7002480EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +57,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		442BFFC129F296AE00068C5E /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				442BFFC229F296BC00068C5E /* NotificationRow.swift */,
+				442BFFC429F2A65400068C5E /* NotificationList.swift */,
+				442BFFC629F2A8FC00068C5E /* NotificationDetail.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		44C9ABD129D68EEB002480EC = {
 			isa = PBXGroup;
 			children = (
@@ -65,15 +87,16 @@
 			isa = PBXGroup;
 			children = (
 				44C9ABFA29D941D0002480EC /* CatDetector.entitlements */,
+				44C9ABFD29D9B020002480EC /* Views */,
 				44C9ABF729D935E0002480EC /* ViewModels */,
 				44C9ABFB29D99BA7002480EC /* AppDelegate.swift */,
 				44C9ABDD29D68EEB002480EC /* CatDetectorApp.swift */,
-				44C9ABDF29D68EEB002480EC /* ContentView.swift */,
 				44C9ABE129D68EEC002480EC /* Assets.xcassets */,
 				44C9ABE629D68EEC002480EC /* Persistence.swift */,
 				44C9ABE829D68EEC002480EC /* CatDetector.xcdatamodeld */,
 				44C9ABE329D68EEC002480EC /* Preview Content */,
-				44C9ABF529D694B9002480EC /* Notification.plist */,
+				44C9ABF529D694B9002480EC /* Settings.plist */,
+				444289B629F3F5080097486B /* Settings.example.plist */,
 			);
 			path = CatDetector;
 			sourceTree = "<group>";
@@ -90,8 +113,19 @@
 			isa = PBXGroup;
 			children = (
 				44C9ABF829D935F1002480EC /* NotificationViewModel.swift */,
+				442BFFBE29F2909000068C5E /* CatDetectionRecord.swift */,
+				442BFFC829F2C59400068C5E /* ResponseModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		44C9ABFD29D9B020002480EC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				442BFFC129F296AE00068C5E /* Notifications */,
+				44C9ABDF29D68EEB002480EC /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,8 +193,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				44C9ABE529D68EEC002480EC /* Preview Assets.xcassets in Resources */,
-				44C9ABF629D694B9002480EC /* Notification.plist in Resources */,
+				44C9ABF629D694B9002480EC /* Settings.plist in Resources */,
 				44C9ABE229D68EEC002480EC /* Assets.xcassets in Resources */,
+				444289B729F3F5090097486B /* Settings.example.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,10 +206,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				442BFFC729F2A8FC00068C5E /* NotificationDetail.swift in Sources */,
+				442BFFC329F296BC00068C5E /* NotificationRow.swift in Sources */,
 				44C9ABFC29D99BA7002480EC /* AppDelegate.swift in Sources */,
 				44C9ABE729D68EEC002480EC /* Persistence.swift in Sources */,
+				442BFFC529F2A65400068C5E /* NotificationList.swift in Sources */,
+				442BFFBF29F2909000068C5E /* CatDetectionRecord.swift in Sources */,
 				44C9ABF929D935F1002480EC /* NotificationViewModel.swift in Sources */,
 				44C9ABE029D68EEB002480EC /* ContentView.swift in Sources */,
+				442BFFC929F2C59400068C5E /* ResponseModel.swift in Sources */,
 				44C9ABEA29D68EEC002480EC /* CatDetector.xcdatamodeld in Sources */,
 				44C9ABDE29D68EEB002480EC /* CatDetectorApp.swift in Sources */,
 			);
@@ -309,7 +349,7 @@
 				DEVELOPMENT_TEAM = 7SN8S32BBW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CatDetector/Notification.plist;
+				INFOPLIST_FILE = CatDetector/Settings.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -343,7 +383,7 @@
 				DEVELOPMENT_TEAM = 7SN8S32BBW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CatDetector/Notification.plist;
+				INFOPLIST_FILE = CatDetector/Settings.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -7,6 +7,7 @@ import {
   cosmosDbContainerName,
   cosmosDbName,
 } from "../utils/constants";
+import { getSasToken } from "../utils/sasToken";
 
 const cache = new NodeCache();
 
@@ -20,7 +21,15 @@ const httpTrigger: AzureFunction = async function (
     .database(cosmosDbName)
     .container(cosmosDbContainerName);
 
+  const sasUrl = await getSasToken(cache);
+  const sasQuery = sasUrl.split("?")[1];
+
   const records = await container.items.query("SELECT * FROM C").fetchAll();
+
+  // Attach SAS token to imageUrls so that iOS app can display images
+  records.resources.forEach((r) => {
+    r.imageUrl += `?${sasQuery}`;
+  });
 
   context.res = {
     body: {

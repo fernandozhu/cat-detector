@@ -19,7 +19,7 @@ export class NotificationClient {
   }
 
   public async sendPushNotification(message: string) {
-    this.initialiseClient();
+    await this.initialiseClient();
 
     const messageBody = JSON.stringify({
       aps: { alert: message, sound: this._alertSound },
