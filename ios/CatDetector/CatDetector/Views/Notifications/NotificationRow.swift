@@ -11,8 +11,6 @@ struct NotificationRow: View {
     
     var body: some View {
         HStack {
-
-                        
             AsyncImage(url: URL(string: record.imageUrl)) { content in
                 content.image?.resizable()
                     .aspectRatio(contentMode: .fill)
@@ -30,8 +28,6 @@ struct NotificationRow: View {
 
 struct NotificationRow_Previews: PreviewProvider {
     static var previews: some View {
-                
-        
         var imageUrl = ""
         var record = CatDetectionRecord(id: "0", date: "2023-04-01", time: "12:00:00", isRead: false, imageUrl: imageUrl)
         NotificationRow(record: record)

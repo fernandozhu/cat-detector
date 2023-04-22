@@ -9,10 +9,9 @@ import SwiftUI
 
 struct NotificationDetail: View {
     
+    @EnvironmentObject var viewModel: NotificationViewModel
     var record: CatDetectionRecord
-    
     var body: some View {
-
         VStack {
             AsyncImage(url: URL(string: record.imageUrl)) { content in
                 content.image?.resizable()
@@ -20,16 +19,24 @@ struct NotificationDetail: View {
                     .frame(width: .infinity)
                     .clipped()
             }
+            
             HStack {
-                Text("Date: \(record.date)")
+                Text("ID:\t\t \(record.id)")
                 Spacer()
             }
             HStack {
-                Text("Time: \(record.time)")
+                Text("Date:\t \(record.date)")
+                Spacer()
+            }
+            HStack {
+                Text("Time:\t \(record.time)")
                 Spacer()
             }
             
             Spacer()
+            Button("Test") {
+                viewModel.markRecordAsRead(id: record.id)
+            }
         }
     }
 }

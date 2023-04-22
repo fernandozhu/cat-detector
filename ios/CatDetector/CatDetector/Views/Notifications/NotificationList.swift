@@ -12,7 +12,6 @@ struct NotificationList: View {
     var records: [CatDetectionRecord]
     var body: some View {
         NavigationView {
-            
             List(records, id: \.id) {record in
                 NavigationLink {
                     NotificationDetail(record: record)

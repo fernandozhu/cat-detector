@@ -47,4 +47,9 @@ class NotificationViewModel: NSObject, ObservableObject {
             
         }
     }
+    
+    func markRecordAsRead(id: String) {
+        // TODO: Call API and mark the record as read
+        print("*** IS READ ID: \(id)")
+    }
 }

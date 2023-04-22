@@ -22,7 +22,7 @@ struct CatDetectorApp: App {
             ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(notifictionViewModel)
-                .onAppear{
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                     notifictionViewModel.fetchRecords()
                 }
         }
