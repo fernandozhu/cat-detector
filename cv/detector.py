@@ -1,17 +1,16 @@
 from ultralytics import YOLO
-from ultralytics.yolo.v8.detect.predict import DetectionPredictor
 from datetime import datetime, timedelta
 import cv2
-from utils import upload_image_to_azure
+from utils import upload_image_to_azure, create_detections_folder
 
 # TARGET_CLASS = "cat"
 TARGET_CLASS = "person"
-COOLDOWN_DURATION = 10 # Minutes
-cooldown_end = None # Cooldown end datetime
+COOLDOWN_DURATION = 10  # Minutes
+cooldown_end = None  # Cooldown end datetime
 
-model = YOLO("yolov8m.pt")
-
+'''
 # https://docs.ultralytics.com/usage/callbacks/#callbacks
+'''
 def on_predict_batch_end(predictor):
     global cooldown_end
 
@@ -25,16 +24,23 @@ def on_predict_batch_end(predictor):
             cls_name = model.names[int(cls)]
             if cls_name == TARGET_CLASS:
                 cooldown_start = datetime.now()
-                cooldown_end = cooldown_start + timedelta(minutes=COOLDOWN_DURATION)
+                cooldown_end = cooldown_start + \
+                    timedelta(minutes=COOLDOWN_DURATION)
                 # Save image locally
                 plot_img = result.plot()
-                filename = './screenshots/{}.png'.format(cooldown_start.strftime("%Y-%m-%d-%H-%M-%S"))
+                filename = './detections/{}.png'.format(
+                    cooldown_start.strftime("%Y-%m-%d-%H-%M-%S"))
                 success = cv2.imwrite(filename, plot_img)
                 if success:
                     # Save image to storage account
                     upload_image_to_azure(filename)
 
+
+create_detections_folder()
+
+model = YOLO("yolov8m.pt")
 model.add_callback("on_predict_batch_end", on_predict_batch_end)
 classes = [index for index in model.names if model.names[index] == TARGET_CLASS]
 # https://docs.ultralytics.com/modes/predict/#arguments
-results = model.predict(source="1", show=True, verbose=False, conf=0.9, classes=classes, save=True)
+results = model.predict(source="1", show=True, verbose=False,
+                        conf=0.9, classes=classes, save=True)
