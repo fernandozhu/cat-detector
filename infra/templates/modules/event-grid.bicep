@@ -24,7 +24,6 @@ resource eventSubscription 'Microsoft.EventGrid/eventSubscriptions@2022-06-15' =
     filter: {
       includedEventTypes: [
         'Microsoft.Storage.BlobCreated'
-        'Microsoft.Storage.BlobDeleted'
       ]
       enableAdvancedFilteringOnArrays: true
     }
