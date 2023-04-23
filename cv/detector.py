@@ -1,10 +1,12 @@
 from ultralytics import YOLO
 from ultralytics.yolo.v8.detect.predict import DetectionPredictor
 from datetime import datetime, timedelta
+import cv2
+from utils import upload_image_to_azure
 
 # TARGET_CLASS = "cat"
 TARGET_CLASS = "person"
-COOLDOWN_DURATION = 1 # Minutes
+COOLDOWN_DURATION = 10 # Minutes
 cooldown_end = None # Cooldown end datetime
 
 model = YOLO("yolov8m.pt")
@@ -24,7 +26,13 @@ def on_predict_batch_end(predictor):
             if cls_name == TARGET_CLASS:
                 cooldown_start = datetime.now()
                 cooldown_end = cooldown_start + timedelta(minutes=COOLDOWN_DURATION)
-                print('*** NEXT COOLDOWN END {}'.format(cooldown_end))
+                # Save image locally
+                plot_img = result.plot()
+                filename = './screenshots/{}.png'.format(cooldown_start.strftime("%Y-%m-%d-%H-%M-%S"))
+                success = cv2.imwrite(filename, plot_img)
+                if success:
+                    # Save image to storage account
+                    upload_image_to_azure(filename)
 
 model.add_callback("on_predict_batch_end", on_predict_batch_end)
 classes = [index for index in model.names if model.names[index] == TARGET_CLASS]
