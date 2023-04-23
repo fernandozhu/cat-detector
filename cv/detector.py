@@ -1,9 +1,32 @@
 from ultralytics import YOLO
 from ultralytics.yolo.v8.detect.predict import DetectionPredictor
+from datetime import datetime, timedelta
+
+# TARGET_CLASS = "cat"
+TARGET_CLASS = "person"
+COOLDOWN_DURATION = 1 # Minutes
+cooldown_end = None # Cooldown end datetime
 
 model = YOLO("yolov8m.pt")
 
-results = model.predict(source="1", show=True, save=True)
-results.orig_img
+# https://docs.ultralytics.com/usage/callbacks/#callbacks
+def on_predict_batch_end(predictor):
+    global cooldown_end
 
-print(results[0].name)
+    if cooldown_end is not None and datetime.now() < cooldown_end:
+        return
+    else:
+        cooldown_end = None
+
+    for result in predictor.results:
+        for cls in result.boxes.cls:
+            cls_name = model.names[int(cls)]
+            if cls_name == TARGET_CLASS:
+                cooldown_start = datetime.now()
+                cooldown_end = cooldown_start + timedelta(minutes=COOLDOWN_DURATION)
+                print('*** NEXT COOLDOWN END {}'.format(cooldown_end))
+
+model.add_callback("on_predict_batch_end", on_predict_batch_end)
+classes = [index for index in model.names if model.names[index] == TARGET_CLASS]
+# https://docs.ultralytics.com/modes/predict/#arguments
+results = model.predict(source="1", show=True, verbose=False, conf=0.9, classes=classes, save=True)
