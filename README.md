@@ -2,10 +2,9 @@ This project provides a solution that detects a cat using computer vision and se
 
 Project folder structure:
 
-`root`
-|- `cv`: Computer vision using YOLO and Python
-|- `infra`: Azure resources and Bicep templates
-|- `ios`: iOS app receives push notifications and display cat detection images
+- `cv`: Computer vision using YOLO and Python
+- `infra`: Azure resources and Bicep templates
+- `ios`: iOS app receives push notifications and display cat detection images
 
 ## Required softwares
 
