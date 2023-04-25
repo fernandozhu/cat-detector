@@ -3,3 +3,4 @@ runs/
 *.pt
 detections/
 .env
+__pycache__/
