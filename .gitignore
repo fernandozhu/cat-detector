@@ -1,3 +1,4 @@
 **/.DS_Store
 infra/templates/apnsToken.txt
 infra/templates/config.json
+.vscode/
