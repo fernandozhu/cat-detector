@@ -44,4 +44,4 @@ model.add_callback("on_predict_batch_end", on_predict_batch_end)
 classes = [index for index in model.names if model.names[index] == TARGET_CLASS]
 # https://docs.ultralytics.com/modes/predict/#arguments
 results = model.predict(source="1", show=True, verbose=False,
-                        conf=0.8, classes=classes, save=True)
+                        conf=0.9, classes=classes, save=True)
